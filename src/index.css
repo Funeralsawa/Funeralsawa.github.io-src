@@ -1,0 +1,24 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url("assets/reymu.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.back {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px); /* 主要模糊效果 */
+    pointer-events: none;
+}
+
+.content {
+    z-index: 1;
+    position: relative;
+    color: wheat;
+}
