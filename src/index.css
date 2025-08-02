@@ -1,24 +1,130 @@
+@import url("./animation.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
 body {
     width: 100vw;
     height: 100vh;
-    margin: 0;
     background-image: url("assets/reymu.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
 }
 
-.back {
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.overray {
+    z-index: 1;
     position: fixed;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 1000vh;
     background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px); /* 主要模糊效果 */
-    pointer-events: none;
+    backdrop-filter: blur(4px);
 }
 
 .content {
-    z-index: 1;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 2;
+    position: absolute;
+    width: 80%;
+    height: 90%;
     color: wheat;
+    margin: 0 auto;
+}
+
+.head-content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 3%;
+}
+
+.head-content .head {
+    border-radius: 50%;
+    width: 200px;
+    animation: spin 6s linear infinite;
+    cursor: pointer;
+}
+
+.mail {
+    display: block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-left: 1%;
+    position: absolute;
+    bottom: 5%;
+}
+
+.animated-text > div {
+    transform: translate(0, -20%);
+}
+
+.animated-text span {
+    font-size: 8rem;
+    background: linear-gradient(90deg, #999, #fff, #a7d314, #41d930, #0490e7, #d404e7);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Montserrat', 'Helvetica Neue', 'Segoe UI', sans-serif;
+    font-weight: 600;
+
+    animation: shine 2s linear infinite;
+}
+
+.body-content {
+    margin-top: 2%;
+    width: 100%;
+    flex: 1;
+    display: flex;
+}
+
+.body-content > .left {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.body-content > .left > div {
+    color: white;
+    width: 95%;
+    height: 15%;
+    /* margin-top: 10%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 13px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.body-content > .left > div:hover {
+    width: 100%;
+    height: 17%;
+    transition: 0.5s;
+}
+
+.body-content > .right {
+    width: 75%;
+    height: 100%;
+    margin-left: 3%;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.08);
 }
