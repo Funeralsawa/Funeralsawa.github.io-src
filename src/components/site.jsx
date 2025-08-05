@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import headImg from "../assets/head.jpg";
 import {Routes, Route} from "react-router-dom";
+import Left from './left';
+import Subscribe from './subscribe';
 
 class Site extends Component {
     state = {  } 
@@ -22,23 +24,25 @@ class Site extends Component {
                             </div>
                             <div>
                                 <a href="mailto:tombforu@foxmail.com" target='_blank' title='Email'>
-                                    <i class="bi bi-envelope mail"></i>
+                                    <i className="bi bi-envelope mail"></i>
                                 </a>
                                 <a href="https://discord.com/users/952139178425069588" target="_blank" title='discord'>
-                                    <i class="bi bi-discord dc"></i>
+                                    <i className="bi bi-discord dc"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div className='body-content'>
                         <div className='left'>
-                            <div className='subscribe'>订阅</div>
-                            <div className='notes'>笔记</div>
-                            <div className='blog'>博客</div>
-                            <div className="aboutMe">关于</div>
+                            <Left />
                         </div>
                         <div className="right">
-
+                            <Routes>
+                                <Route path='/subscribe' element={<Subscribe />}></Route>
+                                <Route path='/notes'></Route>
+                                <Route path='/blogs'></Route>
+                                <Route path='/about'></Route>
+                            </Routes>
                         </div>
                     </div>
                 </div>
