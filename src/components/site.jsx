@@ -29,6 +29,9 @@ class Site extends Component {
                                 <a href="https://discord.com/users/952139178425069588" target="_blank" title='discord'>
                                     <i className="bi bi-discord dc"></i>
                                 </a>
+                                <a href="https://github.com/Funeralsawa" target="_blank" title='github'>
+                                    <i class="bi bi-github github"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

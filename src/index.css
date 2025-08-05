@@ -61,7 +61,7 @@ body {
     cursor: pointer;
 }
 
-.mail, .dc {
+.mail, .dc, .github {
     display: inline-block;
     cursor: pointer;
     font-size: 1.5rem;
@@ -71,7 +71,7 @@ body {
     bottom: 5%;
 }
 
-.mail:hover, .dc:hover {
+.mail:hover, .dc:hover, .github:hover {
     animation: spin 0.4s;
 }
 
@@ -170,15 +170,15 @@ body {
         animation: shine 2s linear infinite;
     }
 
-    .mail, .dc {
+    .mail, .dc, .github {
         position: relative;
-        margin-top: 1rem;
+        margin: 1rem 1rem 0 0;
         bottom: auto;
         left: auto;
         display: inline-block;
     }
 
-    .mail:hover, .dc:hover {
+    .mail:hover, .dc:hover, .github:hover {
         animation: spin 0.4s;
     }
 
