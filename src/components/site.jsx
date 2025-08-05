@@ -21,8 +21,11 @@ class Site extends Component {
                                 ))}
                             </div>
                             <div>
-                                <a href="mailto:tombforu@foxmail.com">
+                                <a href="mailto:tombforu@foxmail.com" target='_blank' title='Email'>
                                     <i class="bi bi-envelope mail"></i>
+                                </a>
+                                <a href="https://discord.com/users/952139178425069588" target="_blank" title='discord'>
+                                    <i class="bi bi-discord dc"></i>
                                 </a>
                             </div>
                         </div>

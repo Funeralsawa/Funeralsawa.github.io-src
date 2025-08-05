@@ -56,14 +56,18 @@ body {
     cursor: pointer;
 }
 
-.mail {
-    display: block;
+.mail, .dc {
+    display: inline-block;
     cursor: pointer;
     font-size: 1.5rem;
     font-weight: 500;
     margin-left: 1%;
-    position: absolute;
+    position: relative;
     bottom: 5%;
+}
+
+.mail:hover, .dc:hover {
+    animation: spin 0.4s;
 }
 
 .animated-text > div {
@@ -71,7 +75,7 @@ body {
 }
 
 .animated-text span {
-    font-size: 8rem;
+    font-size: 7.4vw;
     background: linear-gradient(90deg, #999, #fff, #a7d314, #41d930, #0490e7, #d404e7);
     background-size: 400% 100%;
     background-clip: text;
@@ -127,4 +131,77 @@ body {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     background: rgba(255, 255, 255, 0.08);
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        width: 95%;
+        height: auto;
+        padding: 1rem 0;
+        align-items: center;
+    }
+
+    .head-content {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .head-content .head {
+        width: 120px;
+    }
+
+    .animated-text > div {
+        transform: none;
+        text-align: center;
+    }
+
+    .animated-text span {
+        font-size: 2.5em;
+        animation: shine 2s linear infinite;
+    }
+
+    .mail, .dc {
+        position: relative;
+        margin-top: 1rem;
+        bottom: auto;
+        left: auto;
+        display: inline-block;
+    }
+
+    .mail:hover, .dc:hover {
+        animation: spin 0.4s;
+    }
+
+    .body-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .body-content > .left {
+        width: 90%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .body-content > .left > div {
+        width: 45%;
+        height: 3rem;
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    .body-content > .left > div:hover {
+        width: 48%;
+        height: 3.3rem;
+    }
+
+    .body-content > .right {
+        width: 90%;
+        height: auto;
+        margin: 0;
+        padding: 1rem;
+    }
 }
