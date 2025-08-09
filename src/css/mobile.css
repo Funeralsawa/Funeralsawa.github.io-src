@@ -1,0 +1,112 @@
+/* 从这里开始是响应式适配部分 */
+
+@media (max-width: 768px) {
+    .head {
+        background-attachment: unset;
+    }
+
+    /* 容器布局变成单列 */
+    .content {
+        flex-direction: column;
+        padding: 5% 5% 0 5%;
+        gap: 3%;
+    }
+
+    /* 侧边栏移动到上面（可选） */
+    .content-aside {
+        order: -1;
+        margin-bottom: 5%;
+    }
+
+    /* 头图文字变大，方便手机阅读 */
+    .head-text > .title {
+        font-size: clamp(20px, 7vw, 32px);
+    }
+
+    .head-text > .subtitle {
+        font-size: clamp(16px, 5vw, 24px);
+    }
+
+    /* 导航栏图标和标题变大一点 */
+    .nav-icon {
+        width: 6vw;
+        min-width: 30px;
+    }
+
+    .nav-title {
+        font-size: 4vw;
+    }
+
+    /* 侧边栏头像缩放 */
+    .content-aside-bloginfo > img {
+        width: 30%;
+        min-width: 60px;
+    }
+
+    /* 文字 */
+    .content-aside-bloginfo > p {
+        font-size: 7vw;
+        color: wheat;
+    }
+
+    /* 列表字体变大 */
+    .content-aside-newest-essay > ul li > .title {
+        font-size: clamp(14px, 4vw, 18px);
+        color: wheat;
+    }
+
+    /* 博客数据（阅读数、点赞等）字体变大 */
+    .blog-data {
+        gap: 10%;
+        font-size: 3.5vw;
+    }
+
+    .content-aside-announce {
+        color: wheat;
+    }
+
+    /* 卡片宽度适应手机 */
+    .card-widget {
+        width: 100%;
+        padding: 5% 3%;
+    }
+
+    /* 页脚字体 */
+    .footer {
+        font-size: 3vw;
+        height: auto;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 更小屏幕的进一步优化 */
+    .head {
+        background-attachment: unset;
+    }
+
+    .head-text > .title {
+        font-size: clamp(18px, 8vw, 28px);
+    }
+
+    .head-text > .subtitle {
+        font-size: clamp(14px, 6vw, 20px);
+    }
+
+    .nav-icon {
+        width: 8vw;
+        min-width: 25px;
+    }
+
+    .nav-title {
+        font-size: 5vw;
+    }
+
+    .content-aside-bloginfo > img {
+        width: 35%;
+    }
+
+    .content-aside-newest-essay > ul li > .title {
+        font-size: clamp(13px, 4.5vw, 16px);
+    }
+}
