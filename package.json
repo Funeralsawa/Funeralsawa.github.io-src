@@ -19,6 +19,7 @@
     "highlight.js": "^11.11.1",
     "jquery": "^3.7.1",
     "marked": "^16.1.2",
+    "pinyin": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import headImg from "../assets/head.jpg";
 import BlogData from './blogData';
-import { Link } from "react-router-dom";
-import BlogApp from './blogApp';
 import ContentPosts from './contentPosts'
+import HistoryBlog from './historyBlog';
+import BlogToc from './blogToc';
+import { connect } from 'react-redux';
+import {Routes, Route} from "react-router-dom";
 
 class Content extends Component {
     state = {  } 
@@ -42,17 +44,12 @@ class Content extends Component {
                             </p>
                         </div>
                         <div className="content-aside-newest-essay card-widget">
-                            <i class="bi bi-clock-history">&nbsp;往期文章</i>
-                            <ul>
-                                <li>
-                                    <div className='title' style={{color: "unset"}}>敬请期待</div>
-                                    <div className='time'>2025-08-09</div>
-                                </li>
-                                <li>
-                                    <Link to="/posts/React" className='title'>React.md</Link>
-                                    <div className='time'>2025-08-09</div>
-                                </li>
-                            </ul>
+                            <Routes>
+                                <Route path="/" element={<HistoryBlog />}></Route>
+                                <Route path="/posts/*" 
+                                    element={<BlogToc />}>
+                                </Route>
+                            </Routes>
                         </div>
                     </div>
                 </div>

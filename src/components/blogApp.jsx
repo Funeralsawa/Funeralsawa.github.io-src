@@ -1,12 +1,23 @@
 import React from "react";
 import { marked } from "marked";
 import hljs from "highlight.js";
+import pinyin from "pinyin";
 import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown.css";
+import { setToc } from "../redux/action.js";
+import { setID } from "../redux/action.js";
+import { connect } from "react-redux";
+import { createPortal } from "react-dom";
 
 // 自定义 slugify
 function slugify(text) {
   if (!text) return "";
+  // 如果包含中文，就先转拼音
+  if (/[\u4e00-\u9fa5]/.test(text)) {
+    text = pinyin(text, { style: pinyin.STYLE_NORMAL })
+      .flat()
+      .join("-"); // 你好 世界 → ni-hao-shi-jie
+  }
   return text
     .toString()
     .toLowerCase()
@@ -29,6 +40,7 @@ class BlogApp extends React.Component {
       activeId: "",
     };
     this.contentRef = React.createRef();
+    this.containerRef = React.createRef();
 
     // marked v16 用法
     const renderer = new marked.Renderer();
@@ -59,6 +71,7 @@ class BlogApp extends React.Component {
         const toc = this.generateTOC(text);
         const htmlContent = marked.parse(text);
         this.setState({ markdownText: text, htmlContent, toc });
+        this.props.setToc(toc);
 
         window.addEventListener("scroll", this.handleScroll);
       })
@@ -97,64 +110,14 @@ class BlogApp extends React.Component {
 
     if (currentId !== this.state.activeId) {
       this.setState({ activeId: currentId });
-    }
-  };
-
-  handleTOCClick = (e, id) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      window.scrollTo({
-        top: el.offsetTop - 80,
-        behavior: "smooth",
-      });
+      this.props.setID(currentId);
     }
   };
 
   render() {
-    const { htmlContent, toc, activeId } = this.state;
+    const { htmlContent } = this.state;
     return (
-      <div style={{ display: "flex", gap: "1rem", paddingRight: "1rem" }}>
-        {/* 目录 */}
-        {/* <nav
-          style={{
-            width: 240,
-            position: "sticky",
-            top: "1rem",
-            height: "calc(100vh - 2rem)",
-            overflowY: "auto",
-            borderRight: "1px solid #ddd",
-            paddingRight: "1rem",
-            display: window.innerWidth < 600 ? "none" : "block",
-          }}
-        >
-          <h3>目录</h3>
-          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-            {toc.map(({ id, text, depth }) => (
-              <li
-                key={id}
-                style={{
-                  marginLeft: (depth - 1) * 12,
-                  marginBottom: 6,
-                  fontWeight: activeId === id ? "bold" : "normal",
-                }}
-              >
-                <a
-                  href={`#${id}`}
-                  onClick={(e) => this.handleTOCClick(e, id)}
-                  style={{
-                    color: activeId === id ? "#0366d6" : "#333",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav> */}
-
+      <div className="md-content">
         {/* Markdown 内容 */}
         <article
           ref={this.contentRef}
@@ -167,4 +130,13 @@ class BlogApp extends React.Component {
   }
 }
 
-export default BlogApp;
+const mapStateToProps = (state) => ({
+  targetNode: state.targetNode,
+});
+
+const mapDispatchToProps = {
+  setToc,
+  setID
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogApp);
