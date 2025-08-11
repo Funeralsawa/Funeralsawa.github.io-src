@@ -7,7 +7,7 @@ import "github-markdown-css/github-markdown.css";
 import { setToc } from "../redux/action.js";
 import { setID } from "../redux/action.js";
 import { connect } from "react-redux";
-import { createPortal } from "react-dom";
+import { useParams } from 'react-router-dom';
 
 // 自定义 slugify
 function slugify(text) {
@@ -62,7 +62,7 @@ class BlogApp extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/posts/${this.state.name}`)
+    fetch(`/posts/${this.state.name}.md`)
       .then((res) => {
         if (!res.ok) throw new Error("加载失败");
         return res.text();
@@ -117,7 +117,7 @@ class BlogApp extends React.Component {
   render() {
     const { htmlContent } = this.state;
     return (
-      <div className="md-content">
+      <React.Fragment>
         {/* Markdown 内容 */}
         <article
           ref={this.contentRef}
@@ -125,7 +125,7 @@ class BlogApp extends React.Component {
           style={{ flex: 1, overflowWrap: "break-word" }}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -139,4 +139,10 @@ const mapDispatchToProps = {
   setID
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogApp);
+const BlogAppWithParams = (props) => {
+  const { name } = useParams(); // 直接解构
+  console.log(name);
+  return <BlogApp {...props} name={name} />;
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogAppWithParams);

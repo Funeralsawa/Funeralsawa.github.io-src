@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Routes, Route } from "react-router-dom"
 import BlogApp from './blogApp';
+import BlogPreview from './blogPreview';
 
 class ContentPosts extends Component {
     state = {  } 
@@ -8,7 +9,8 @@ class ContentPosts extends Component {
         return (
             <div className="content-posts">
                 <Routes>
-                    <Route path="/posts/React" element={<BlogApp name="React.md" />}></Route>
+                    <Route path="/" element={<BlogPreview />}></Route>
+                    <Route path="/posts/:name" element={<BlogApp />}></Route>
                 </Routes>
             </div>
         );
