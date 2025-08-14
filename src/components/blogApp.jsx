@@ -16,7 +16,7 @@ function slugify(text) {
   if (/[\u4e00-\u9fa5]/.test(text)) {
     text = pinyin(text, { style: pinyin.STYLE_NORMAL })
       .flat()
-      .join("-"); // 你好 世界 → ni-hao-shi-jie
+      .join("-"); // 你好世界 → ni-hao-shi-jie
   }
   return text
     .toString()
@@ -41,12 +41,13 @@ class BlogApp extends React.Component {
     };
     this.contentRef = React.createRef();
     this.containerRef = React.createRef();
+    this.idMap = {};
 
     // marked v16 用法
     const renderer = new marked.Renderer();
     renderer.heading = (token) => {
       const text = token.text || "";
-      const id = slugify(text);
+      let id = slugify(text);
       return `<h${token.depth} id="${id}">${text}</h${token.depth}>`;
     };
 
@@ -87,24 +88,27 @@ class BlogApp extends React.Component {
     const tokens = marked.lexer(mdText);
     return tokens
       .filter((t) => t.type === "heading" && t.depth <= 3)
-      .map((t) => ({
-        text: t.text,
-        id: slugify(t.text),
-        depth: t.depth,
-      }));
+      .map((t) => {
+        const id = slugify(t.text);
+        return { text: t.text, id, depth: t.depth };
+      });
   }
 
   handleScroll = () => {
     if (!this.contentRef.current) return;
 
     const { toc } = this.state;
-    const scrollPosition = window.scrollY + 100;
+    const topOffset = -10;
     let currentId = "";
 
     for (const heading of toc) {
       const el = document.getElementById(heading.id);
-      if (el && el.offsetTop <= scrollPosition) {
+      if (!el) continue;
+
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= topOffset) {
         currentId = heading.id;
+        break; // 最靠上的标题
       }
     }
 
@@ -113,6 +117,7 @@ class BlogApp extends React.Component {
       this.props.setID(currentId);
     }
   };
+
 
   render() {
     const { htmlContent } = this.state;

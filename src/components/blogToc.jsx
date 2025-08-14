@@ -10,15 +10,16 @@ class BlogToc extends Component {
     }
 
     handleTOCClick = (e, id) => {
-        e.preventDefault();
-        const el = document.getElementById(id);
-        if (el) {
-            window.scrollTo({
-                top: el.offsetTop + window.innerHeight,
-                behavior: "smooth",
-            });
-        }
-    };
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) {
+        const topOffset = el.getBoundingClientRect().top + window.scrollY; 
+        window.scrollTo({
+            top: topOffset,
+            behavior: "smooth",
+        });
+    }
+};
 
     render() { 
         const {activeId, toc} = this.props;

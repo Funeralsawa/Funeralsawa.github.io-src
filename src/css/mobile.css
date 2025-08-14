@@ -1,6 +1,10 @@
 /* 从这里开始是响应式适配部分 */
 
 @media (max-width: 768px) {
+    .toc-toggle {
+        display: inherit !important;
+    }
+
     /* 容器布局变成单列 */
     .content {
         flex-direction: column;

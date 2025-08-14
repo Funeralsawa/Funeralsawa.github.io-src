@@ -108,6 +108,47 @@ body {
     font-weight: bold;
 }
 
+.toc-toggle {
+    display: none !important;
+    margin-right: 2%;
+    color: white;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    cursor: pointer;
+}
+
+.toc-drawer {
+    position: fixed;
+    top: 0;
+    right: -80%;      /* 初始隐藏在屏幕外 */
+    width: 80%;       /* 占屏幕宽度比例，可调 */
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+    transition: right 0.5s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-drawer.open {
+    right: 0; /* 滑入屏幕 */
+}
+
+.toc-content {
+    overflow-y: auto;
+}
+
+.close-btn {
+    align-self: flex-end;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
+
 .head-text {
     z-index: 1;
     position: relative;
@@ -194,6 +235,7 @@ body {
     border-radius: 50%;
     margin-top: 10%;
     animation: spin 5s linear infinite;
+    user-select: none;
 }
 
 .content-aside-bloginfo > p {
@@ -266,6 +308,18 @@ body {
     margin: 0 5%;
 }
 
+.content-aside-newest-essay {
+    position: sticky;
+    top: 1rem; /* 距离屏幕顶部的固定位置 */
+    max-height: calc(100vh - 1rem); /* 限制高度为屏幕高度 - top 的间距 */
+    overflow-y: auto;
+}
+
+.content-aside-newest-essay::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 .content-aside-newest-essay > ul {
     list-style: none;
     position: relative; 
@@ -306,7 +360,7 @@ body {
     font-size: 1vw;
     text-align: left;
     text-decoration: none;
-    color: unset;
+    color: wheat;
     transition: color 0.3s;
 }
 
