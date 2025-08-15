@@ -108,45 +108,56 @@ body {
     font-weight: bold;
 }
 
-.toc-toggle {
+.drawer-toggle {
     display: none !important;
     margin-right: 2%;
-    color: white;
-    transition: right 0.3s ease;
-    display: flex;
-    flex-direction: column;
+    color: black;
     user-select: none;
     cursor: pointer;
 }
 
-.toc-drawer {
+.info-drawer {
     position: fixed;
     top: 0;
-    right: -80%;      /* 初始隐藏在屏幕外 */
-    width: 80%;       /* 占屏幕宽度比例，可调 */
+    right: 0;
+    width: 80vw;       /* 占屏幕宽度比例，可调 */
     height: 100vh;
-    background: white;
-    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-    transition: right 0.5s ease;
     z-index: 1000;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    transform: translateX(100%); /* 初始在屏幕外 */
+    transition: transform 0.5s ease;
+    will-change: transform; /* 提示浏览器优化 */
 }
 
-.toc-drawer.open {
-    right: 0; /* 滑入屏幕 */
+.info-drawer.open {
+    transform: translateX(0); /* 滑入屏幕 */
 }
 
-.toc-content {
-    overflow-y: auto;
+.drawer-content {
+    width: 100%;
+    background: white;
+    z-index: 999;
+    box-shadow: -2px 0 8px rgba(7, 7, 7, 0.2);
 }
 
-.close-btn {
-    align-self: flex-end;
-    padding: 0.5rem 1rem;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
+.info-drawer-overray {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.6s ease 0s;
+}
+
+.info-drawer-overray.open {
+    background: rgba(0, 0, 0, 0.7);
+    pointer-events: auto; /* 打开时可点击 */
 }
 
 .head-text {
@@ -456,4 +467,46 @@ body {
     word-wrap: break-word !important;
     word-break: break-word !important;
     overflow-x: auto !important;
+}
+
+.aside-navbar-toggle {
+    position: fixed;
+    right: -8vw;
+    bottom: 10vh;
+    z-index: 1000;
+    background-color: rgba(118, 203, 237, 0.15);
+    border-radius: 5px;
+    border: 1px solid #424345cb;
+    padding: 0 1.5%;
+    font-size: large;
+    transition: right 0.3s linear;
+}
+
+.aside-navbar-drawer {
+    width: 0;
+    height: 0;
+    position: fixed;
+    bottom: 10%;
+    right: 12%; 
+    z-index: 1000;
+    border-radius: 20px;
+    padding: 5%;
+    transition: width 0.3s, height 0.3s;
+}
+
+.aside-navbar-drawer-content {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.aside-navbar-drawer-open {
+    width: 80%;
+    height: 40%;
+    background: #FFFFFF; /* 白色半透明 */
+    box-shadow: -2px 0 8px rgba(0,0,0,0.3);;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }

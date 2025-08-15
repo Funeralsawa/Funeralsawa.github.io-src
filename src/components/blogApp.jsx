@@ -83,6 +83,14 @@ class BlogApp extends React.Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.name !== this.props.name) {
+      this.setState({
+        name: this.props.name
+      }, this.componentDidMount);
+    }
+  }
+
   // 生成目录
   generateTOC(mdText) {
     const tokens = marked.lexer(mdText);
@@ -146,7 +154,6 @@ const mapDispatchToProps = {
 
 const BlogAppWithParams = (props) => {
   const { name } = useParams(); // 直接解构
-  console.log(name);
   return <BlogApp {...props} name={name} />;
 };
 

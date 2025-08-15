@@ -1,8 +1,12 @@
 /* 从这里开始是响应式适配部分 */
 
 @media (max-width: 768px) {
-    .toc-toggle {
+    .drawer-toggle {
         display: inherit !important;
+    }
+
+    .aside-navbar-display {
+        right: 3vw;
     }
 
     /* 容器布局变成单列 */
@@ -19,8 +23,8 @@
 
     /* 侧边栏移动到上面（可选） */
     .content-aside {
-        min-width: 100%;
         order: -1;
+        min-width: 100%;
         margin-bottom: 5%;
         margin: 0;
     }

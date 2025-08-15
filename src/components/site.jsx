@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
+import AsideNavbar from './asideNavbar';
 import Head from './head';
 import Content from './content';
 import Footer from './footer';
@@ -13,6 +14,9 @@ class Site extends Component {
         return (
             <React.Fragment>
                 <Navbar />
+                <Routes>
+                    <Route path='/posts/*' element={<AsideNavbar />}></Route>
+                </Routes>
                 <Head />
                 <Content />
                 <Footer />

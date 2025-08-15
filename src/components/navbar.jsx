@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import headImg from "../assets/head.jpg";
-import blogToc from './blogToc';
-import BlogToc from './blogToc';
+import InfoDrawer from './infoDrawer';
 
 class Navbar extends Component {
     state = {
@@ -73,13 +72,15 @@ class Navbar extends Component {
                             <img className="nav-icon" src={headImg} alt="icon" draggable="False" />
                             <div className='nav-title'>Funerals's blog</div>
                         </div>
-                        <div className="toc-toggle" onClick={() => this.setOpen(true)}>☰</div>
+                        <div className="drawer-toggle" onClick={() => this.setOpen(true)}>☰</div>
                     </div>
-                    <div className={`toc-drawer ${this.state.open ? 'open' : ''}`}>
-                        <button className="close-btn" onClick={() => this.setOpen(false)}>✕</button>
-                        <div className="toc-content">
-                            <BlogToc />
+                    <div className={`info-drawer ${this.state.open ? 'open' : ''}`}>
+                        <div className="drawer-content">
+                            <InfoDrawer />
                         </div>
+                    </div>
+                    <div className={`info-drawer-overray ${this.state.open ? 'open' : ''}`}
+                            onClick={() => this.setOpen(false)}>
                     </div>
                 </nav>
             </React.Fragment>
