@@ -179,7 +179,7 @@ REST，全称是`Representation State Transfer`，首次出现在2000年Roy Fiel
 
 
 
-## 序列化
+## 序列化与反序列化
 
 `API`接口开发，最核心常见的一个代码编写过程就是序列化，所谓序列化就是把数据转换格式变成`json`、`pickle`、`base64`等等。
 
@@ -195,7 +195,7 @@ REST，全称是`Representation State Transfer`，首次出现在2000年Roy Fiel
 
 
 
-## DRF
+## DRF概述
 
 DRF（Django Rest Framework），是一个建立在`Django`之上的web应用子框架，可以快速地开发`REST API`接口应用。在`DRF`中提供了序列化器`Serialzier`的定义，可以帮助我们简化序列化和反序列的过程，并且为我们提供了丰富的类视图、扩展类、视图集来简化视图的编写工作。`DRF`还提供了认证、权限、限流、过滤、分页、接口文档等功能的支持。`DRF`还提供了一个测试`API`接口的可视化界面。
 
@@ -918,7 +918,7 @@ def save(self, **kwargs):
 
 ## 模型序列化器ModelSerializer
 
-### 说明
+### 概述
 
 如果想要序列化器对应的是`Django`的模型类，DRF提供了`ModelSerializer`模型类序列化器。使得我们可以快速构建一个`Serializer`类。
 
@@ -2830,7 +2830,7 @@ REST_FRAMEWORK = {
 
 ### 自动生成接口文档
 
-#### 说明
+#### 接口文档说明
 
 `DRF`可以自动生成接口文档，以网页的方式呈现。自动接口文档生成的是继承自`APIView`及其子类的视图。
 
@@ -2902,7 +2902,7 @@ REST_FRAMEWORK = {
 
 ## Admin站点管理
 
-### 说明
+### 组件说明
 
 `Django`内置了一个强大的组件叫`Admin`，提供给网站管理员快速开发运营后台的管理站点。
 
