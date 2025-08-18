@@ -126,9 +126,10 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    background-color: #F6F8FA;
 
     transform: translateX(100%); /* 初始在屏幕外 */
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
     will-change: transform; /* 提示浏览器优化 */
 }
 
@@ -505,8 +506,46 @@ body {
 .aside-navbar-drawer-open {
     width: 80%;
     height: 40%;
-    background: #FFFFFF; /* 白色半透明 */
+    background: #FFFFFF;
     box-shadow: -2px 0 8px rgba(0,0,0,0.3);;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
+}
+
+.info-drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh 0;
+    max-width: 100%;
+    align-items: center;
+}
+
+.info-drawer-content-bloginfo {
+    height: 40%;
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh 0;
+}
+
+.info-drawer-content-bloginfo > img {
+    border-radius: 50%;
+    width: 30%;
+}
+
+.info-drawer-content-essay {
+    width: 80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 5%;
+    gap: 1vh;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 0 1px 1px rgba(7, 17, 27, 0.05);
 }
