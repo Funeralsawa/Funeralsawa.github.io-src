@@ -13,8 +13,9 @@ class HistoryBlog extends Component {
                 return res.json();
             })
             .then(posts => {
-                // 对每篇文章获取 Last-Modified
+                // 直接获取文章的信息
                 Promise.all(posts.map(async post => {
+                    /*
                     try {
                         const res = await fetch(post.url, { method: 'HEAD' });
                         const lastModified = res.headers.get('Last-Modified');
@@ -25,6 +26,8 @@ class HistoryBlog extends Component {
                     } catch {
                         return { ...post, time: '未知时间' };
                     }
+                    */
+                    return {...post}
                 }))
                 .then(postsWithTime => {
                     this.setState({ data: postsWithTime });
