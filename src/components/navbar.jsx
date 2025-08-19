@@ -72,6 +72,13 @@ class Navbar extends Component {
                             <img className="nav-icon" src={headImg} alt="icon" draggable="False" />
                             <div className='nav-title'>Funerals's blog</div>
                         </div>
+                        <div className="nav-links">
+                            <a href="/">
+                                <i class="bi bi-house-door-fill"></i>
+                                &nbsp;
+                                首页
+                            </a>
+                        </div>
                         <div className="drawer-toggle" onClick={() => this.setOpen(true)}>☰</div>
                     </div>
                     <div className={`info-drawer ${this.state.open ? 'open' : ''}`}>

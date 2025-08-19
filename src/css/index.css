@@ -108,6 +108,40 @@ body {
     font-weight: bold;
 }
 
+.nav-links {
+    margin-right: 2%;
+}
+
+.nav-links > a {
+    position: relative;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s linear;
+}
+
+.nav-links > a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #80c8f8;
+    height: 3px;
+    width: 100%;
+    border-radius: 6px;
+    transform: translateY(200%) scaleX(0);
+    transform-origin: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links > a:hover::after {
+    transform: translateY(200%) scaleX(1);
+}
+
+.nav-links > a:hover {
+    color: #eee;
+    cursor: pointer;
+}
+
 .drawer-toggle {
     display: none !important;
     margin-right: 2%;
@@ -126,7 +160,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    background-color: #F6F8FA;
 
     transform: translateX(100%); /* 初始在屏幕外 */
     transition: all 0.5s ease;
@@ -139,7 +172,7 @@ body {
 
 .drawer-content {
     width: 100%;
-    background: white;
+    background: #F6F8FA;
     z-index: 999;
     box-shadow: -2px 0 8px rgba(7, 7, 7, 0.2);
 }
@@ -515,7 +548,7 @@ body {
 .info-drawer-content {
     display: flex;
     flex-direction: column;
-    gap: 5vh 0;
+    gap: 1vh 0;
     max-width: 100%;
     align-items: center;
 }
@@ -523,7 +556,7 @@ body {
 .info-drawer-content-bloginfo {
     height: 40%;
     width: 100%;
-    margin-top: 10%;
+    margin: 10% 0 10% 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -536,16 +569,12 @@ body {
     width: 30%;
 }
 
-.info-drawer-content-essay {
-    width: 80%;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 5%;
-    gap: 1vh;
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    box-shadow: 0 0 1px 1px rgba(7, 17, 27, 0.05);
+.info-drawer-content-somefunction {
+    padding: 3%;
+    font-size: large;
+}
+
+.info-drawer-content-somefunction > a {
+    text-decoration: none;
+    color: unset;
 }

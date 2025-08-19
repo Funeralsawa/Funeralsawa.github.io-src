@@ -1,6 +1,10 @@
 /* 从这里开始是响应式适配部分 */
 
 @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
     .drawer-toggle {
         display: inherit !important;
     }

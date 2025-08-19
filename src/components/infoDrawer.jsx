@@ -13,7 +13,14 @@ class InfoDrawer extends Component {
                         <img src={headImg} alt="headImg" draggable="false" />
                         <BlogData />
                     </div>
-                    <div className="content-aside-newest-essay info-drawer-content-essay">
+                    <div className="info-drawer-content-somefunction info-drawer-content-card-widget">
+                        <a href="/">
+                            <i class="bi bi-house-door-fill"></i>
+                            &nbsp;
+                            首页
+                        </a>
+                    </div>
+                    <div className="content-aside-newest-essay info-drawer-content-card-widget">
                         <HistoryBlog />
                     </div>
                 </div>

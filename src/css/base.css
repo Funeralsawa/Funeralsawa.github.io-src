@@ -12,3 +12,16 @@
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
 }
+
+.info-drawer-content-card-widget {
+    width: 80%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    gap: 1vh;
+    box-shadow: 0 0 1px 1px rgba(7, 17, 27, 0.05);
+}
