@@ -21,6 +21,7 @@
     justify-content: space-around;
     align-items: center;
     background-color: #FFFFFF;
+    overflow-x: auto;
     border-radius: 10px;
     gap: 1vh;
     box-shadow: 0 0 1px 1px rgba(7, 17, 27, 0.05);

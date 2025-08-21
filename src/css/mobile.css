@@ -5,6 +5,10 @@
         display: none;
     }
 
+    .subscribe-content, .subscribe-content * {
+        display: none;
+    }
+
     .drawer-toggle {
         display: inherit !important;
     }

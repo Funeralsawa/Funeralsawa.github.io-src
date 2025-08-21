@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import HistoryBlog from './historyBlog';
 import BlogData from './blogData';
-import headImg from '../assets/head.jpg'
+import headImg from '../assets/head.jpg';
+import Subscribe from './subscribe';
 
 class InfoDrawer extends Component {
-    state = {  } 
+    state = {
+        showSubscribe: false
+    } 
+
+    handleClick = () => {
+        if(window.innerWidth < 768) {
+            this.setState({
+                showSubscribe: !this.state.showSubscribe
+            });
+        }
+    }
+    
     render() { 
         return (
             <React.Fragment>
@@ -19,9 +31,14 @@ class InfoDrawer extends Component {
                             &nbsp;
                             首页
                         </a>
+                        <div className="subscribe-button" onClick={this.handleClick}>
+                            <i class="bi bi-airplane"></i>
+                            &nbsp;
+                            订阅
+                        </div>
                     </div>
                     <div className="content-aside-newest-essay info-drawer-content-card-widget">
-                        <HistoryBlog />
+                        {this.state.showSubscribe ? <Subscribe /> : <HistoryBlog />}
                     </div>
                 </div>
             </React.Fragment>

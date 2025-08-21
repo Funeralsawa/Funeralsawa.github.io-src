@@ -14,16 +14,12 @@ class Subscribe extends Component {
 
     styleDiv = {
         color: "white",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
     }
 
     styleInput = {
         display: "inline-block",
         opacity: "10%",
-        borderRadius: "13px"
+        borderRadius: "10px"
     }
 
     copyText = () => {
@@ -78,14 +74,14 @@ class Subscribe extends Component {
         else
             return (
                 <React.Fragment>
-                    <p>Hello World</p>
+                    <p style={{color: "gold"}}>Hello TPS Member</p>
                     <div className='subscribeDiv'>
                         <p>主：{this.state.mainSubscribe}</p>
                         <p>备用1：{this.state.backup1}</p>
                         <p>备用2：{this.state.backup2}</p>
                         <p>备用3：{this.state.backup3}</p>
                     </div>
-                    <button onClick={this.copyText} className='btn btn-outline-light btn-lg copy'>复制</button>
+                    <button onClick={this.copyText} className='btn btn-outline-dark btn-lg copy'>复制</button>
                 </React.Fragment>
             );
     }
