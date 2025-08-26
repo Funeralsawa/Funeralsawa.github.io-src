@@ -555,6 +555,7 @@ body {
     flex-direction: column;
     gap: 1vh 0;
     max-width: 100%;
+    max-height: 100%;
     align-items: center;
 }
 
@@ -582,6 +583,10 @@ body {
 .info-drawer-content-somefunction > a {
     text-decoration: none;
     color: unset;
+}
+
+.info-drawer-content .content-aside-newest-essay {
+    overflow: auto !important;
 }
 
 .subscribe-content {
