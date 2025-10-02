@@ -42,18 +42,20 @@ class HistoryBlog extends Component {
         return (
             <React.Fragment>
                 <i className="bi bi-clock-history">&nbsp;往期文章</i>
-                <ul>
-                    <li>
-                        <div className='title' style={{ color: "unset" }}>敬请期待</div>
-                        <div className='time'>2025-08-09</div>
-                    </li>
-                    {this.state.data.map((data, index) => (
-                        <li key={index}>
-                            <Link to={data.url.split(".")[0]} className='title'>{data.file}</Link>
-                            <div className='time'>{data.time}</div>
+                <div>
+                    <ul>
+                        <li>
+                            <div className='title' style={{ color: "unset" }}>敬请期待</div>
+                            <div className='time'>2025-08-09</div>
                         </li>
-                    ))}
-                </ul>
+                        {this.state.data.map((data, index) => (
+                            <li key={index}>
+                                <Link to={data.url.split(".")[0]} className='title'>{data.file}</Link>
+                                <div className='time'>{data.time}</div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </React.Fragment>
         );
     }

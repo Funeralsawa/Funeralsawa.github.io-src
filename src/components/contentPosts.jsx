@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Routes, Route } from "react-router-dom"
-import BlogApp from './blogApp';
 import BlogPreview from './blogPreview';
 
 class ContentPosts extends Component {
@@ -8,10 +6,7 @@ class ContentPosts extends Component {
     render() { 
         return (
             <div className="content-posts">
-                <Routes>
-                    <Route path="/" element={<BlogPreview />}></Route>
-                    <Route path="/posts/:name" element={<BlogApp />}></Route>
-                </Routes>
+                <BlogPreview />
             </div>
         );
     }

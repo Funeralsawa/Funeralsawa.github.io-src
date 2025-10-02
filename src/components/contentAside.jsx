@@ -35,20 +35,14 @@ class ContentAside extends Component {
                         </div>
                     </div>
                     <div className="content-aside-announce card-widget">
-                        <i class="bi bi-geo-alt">&nbsp;潮汕</i>
+                        <i className="bi bi-geo-alt">&nbsp;潮汕</i>
                         <p>
                             大抵是个INTJ-A，勉强算个全栈工程师，偏爱前端。
                             心理学，社会学，计算机科学，欢迎与我交流。                                
                         </p>
                     </div>
                     <div className="content-aside-newest-essay card-widget">
-                        <Routes>
-                            <Route path="/" element={<HistoryBlog />}></Route>
-                            {this.state.is_mobile ? (
-                                <Route path="/posts/*" element={<HistoryBlog />}></Route>) : (
-                                <Route path="/posts/*" element={<BlogToc />}></Route>)
-                            }
-                        </Routes>
+                        <HistoryBlog />
                     </div>
                 </div>
             </React.Fragment>

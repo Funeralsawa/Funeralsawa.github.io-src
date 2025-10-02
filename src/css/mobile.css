@@ -13,6 +13,23 @@
         display: inherit !important;
     }
 
+    .aside-navbar-toggle {
+        right: -8vw;
+        z-index: 1000;
+        padding: 0 1.5%;
+        transition: right 0.3s linear;
+    }
+
+    .aside-navbar-drawer {
+        right: 12%;
+    }
+
+    .aside-navbar-drawer-open {
+        width: 80%;
+        height: 40%;
+        background: #FFFFFF;
+    }
+
     .aside-navbar-display {
         right: 3vw;
     }
@@ -69,7 +86,7 @@
     }
 
     /* 列表字体变大 */
-    .content-aside-newest-essay > ul li > .title {
+    .content-aside-newest-essay > div > ul li > .title {
         font-size: clamp(14px, 4vw, 18px);
         color: wheat;
     }
@@ -80,14 +97,27 @@
         font-size: 3.5vw;
     }
 
+    .blog-data-el {
+        color: #FFFFFF;
+    }
+
     .content-aside-announce {
         color: wheat;
+    }
+    
+    .content-aside-announce > p {
+        color: #FFFFFF;
     }
 
     /* 卡片宽度适应手机 */
     .card-widget {
         width: 100%;
         padding: 5% 3%;
+    }
+
+    .blog-content {
+        width: 95%;
+        flex-direction: column;
     }
 
     /* 页脚字体 */
@@ -121,7 +151,7 @@
         width: 35%;
     }
 
-    .content-aside-newest-essay > ul li > .title {
+    .content-aside-newest-essay > div > ul li > .title {
         font-size: clamp(13px, 4.5vw, 16px);
     }
 }
