@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import posts from '../assets/posts/posts.json';
 import { Link } from "react-router-dom";
 
 class HistoryBlog extends Component {
@@ -7,35 +8,7 @@ class HistoryBlog extends Component {
     };
 
     componentDidMount = () => {
-        fetch('/posts/posts.json')
-            .then(res => {
-                if (!res.ok) throw new Error('加载 posts.json 失败');
-                return res.json();
-            })
-            .then(posts => {
-                // 直接获取文章的信息
-                Promise.all(posts.map(async post => {
-                    /*
-                    try {
-                        const res = await fetch(post.url, { method: 'HEAD' });
-                        const lastModified = res.headers.get('Last-Modified');
-                        return {
-                            ...post,
-                            time: lastModified ? new Date(lastModified).toLocaleDateString() : '未知时间'
-                        };
-                    } catch {
-                        return { ...post, time: '未知时间' };
-                    }
-                    */
-                    return {...post}
-                }))
-                .then(postsWithTime => {
-                    this.setState({ data: postsWithTime });
-                });
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        this.setState({ data: posts});
     };
 
     render() { 

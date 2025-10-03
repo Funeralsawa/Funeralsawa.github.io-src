@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom';
+import posts from '../assets/posts/posts.json';
+import { useParams, useLocation } from 'react-router-dom';
 
 class PaperBanner extends Component {
     state = {
-        name: this.props.params.name || "",
+        name: "",
         publishedAt: "",
     }
     
@@ -11,22 +12,18 @@ class PaperBanner extends Component {
         this.getPaperInfo();
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.location.pathname !== prevProps.location.pathname) {
+            this.getPaperInfo();
+        }
+    }
+
     getPaperInfo = () => {
-        console.log("Fetching info for paper:", this.props.params.name);
-        fetch('/posts/posts.json') // 先读取 posts.json，拿到所有 md 文件路径和文件名
-        .then(res => {
-            if (!res.ok) throw new Error('加载 posts.json 失败');
-            return res.json();
-        })
-        .then(posts => {
         // posts 是数组，格式类似 [{ file: "React.md", url: "/posts/React.md" }, ...]
-            const post = posts.find(p => p.file === `${this.props.params.name}.md`);
-            if (!post) throw new Error('未找到对应的文章');
-            this.setState({...this.state, publishedAt: post.time});
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        const post = posts.find(p => p.url === `${this.props.location.pathname}.md`);
+        const name = post ? post.file.replace(/\.md$/, '') : "";
+        if (!post) throw new Error('未找到对应的文章');
+        this.setState({name: name, publishedAt: post.time});
     }
     
     render() {
@@ -43,6 +40,9 @@ class PaperBanner extends Component {
     }
 }
 
-export default (props) => (
-    <PaperBanner {...props} params={useParams()} />
-);
+export default (props) => {
+    const location = useLocation();
+    return (
+        <PaperBanner {...props} params={useParams() } location={location} />
+    )
+};

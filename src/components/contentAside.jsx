@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import BlogData from './blogData';
 import headImg from "../assets/head.jpg";
 import HistoryBlog from './historyBlog';
-import BlogToc from './blogToc';
-import { Routes, Route } from "react-router-dom";
 
 class ContentAside extends Component {
     state = { 

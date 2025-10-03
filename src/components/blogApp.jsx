@@ -8,6 +8,7 @@ import { setToc } from "../redux/action.js";
 import { setID } from "../redux/action.js";
 import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
+import posts from '../assets/posts/posts.json';
 
 // 自定义 slugify
 function slugify(text) {
@@ -63,20 +64,25 @@ class BlogApp extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/posts/${this.state.name}.md`)
-      .then((res) => {
-        if (!res.ok) throw new Error("加载失败");
-        return res.text();
-      })
-      .then((text) => {
-        const toc = this.generateTOC(text);
-        const htmlContent = marked.parse(text);
-        this.setState({ markdownText: text, htmlContent, toc });
-        this.props.setToc(toc);
+    const modules = import.meta.glob("../assets/posts/*.md", { as: "raw" });
 
-        window.addEventListener("scroll", this.handleScroll);
-      })
-      .catch(console.error);
+    const targetPath = `../assets/posts/${this.state.name}.md`;
+    if (!modules[targetPath]) {
+      console.error("文件不存在:", targetPath);;
+      return;
+    }
+    
+    modules[targetPath]()
+    .then((text) => {
+      const toc = this.generateTOC(text);
+      const htmlContent = marked.parse(text);
+
+      this.setState({ markdownText: text, htmlContent, toc });
+      this.props.setToc(toc);
+
+      window.addEventListener("scroll", this.handleScroll);
+    })
+    .catch(console.error);
   }
 
   componentWillUnmount() {

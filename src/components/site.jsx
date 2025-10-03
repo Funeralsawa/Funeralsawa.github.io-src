@@ -7,7 +7,8 @@ import BlogApp from './blogApp';
 import AsideNavbar from './asideNavbar';
 import PaperBanner from './paperBanner';
 import bg from '../assets/background.png';
-import {Routes, Route, useLocation} from "react-router-dom";
+import Error404 from './404';
+import {Routes, Route, useLocation, Navigate} from "react-router-dom";
 
 class Site extends Component {
     state = {
@@ -56,6 +57,8 @@ class Site extends Component {
                             </div>
                         </>
                     )} />
+                    <Route path="/404" element={<Error404 />}></Route>
+                    <Route path="*" element={<Navigate replace to="/404" />}></Route>
                 </Routes>
                 <Footer />
             </React.Fragment>

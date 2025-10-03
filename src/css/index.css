@@ -664,6 +664,16 @@ body {
     margin-top: 1%;
 }
 
+.Error404 {
+    position: absolute;
+    color: red;
+    top: 50vh;
+    left: 50vw;
+    font-size: 3vw;
+    user-select: none;
+    transform: translate(-50%, -50%);
+}
+
 .subscribeDiv {
     width: 100%;
     overflow: auto;

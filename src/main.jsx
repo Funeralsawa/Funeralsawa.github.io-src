@@ -8,7 +8,7 @@ import SiteWrapper from './components/site.jsx'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.min.js"
 import "bootstrap-icons/font/bootstrap-icons.min.css"
-import { HashRouter, useLocation } from 'react-router-dom'
+import { BrowserRouter, HashRouter, useLocation } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
 
@@ -23,12 +23,12 @@ function ScrollToTop() {
 }
 
 createRoot(document.getElementById('root')).render(
-  <HashRouter>
+  <BrowserRouter>
     <ScrollToTop />
     <Provider store={store}>
       <div className="container">
         <SiteWrapper />
       </div>
     </Provider>
-  </HashRouter>
+  </BrowserRouter>
 )

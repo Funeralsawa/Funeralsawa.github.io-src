@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const postsDir = path.join(__dirname, '../../public/posts');
+const postsDir = path.join(__dirname, '../assets/posts');
 
 const files = fs.readdirSync(postsDir)
   .filter(f => f.endsWith('.md'))
