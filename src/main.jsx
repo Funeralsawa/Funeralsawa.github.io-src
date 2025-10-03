@@ -4,6 +4,7 @@ import './css/index.css'
 import "./css/typeWriter.css"
 import "./css/base.css"
 import "./css/mobile.css"
+import "./css/iosCompatible.css"
 import SiteWrapper from './components/site.jsx'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.min.js"
