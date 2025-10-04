@@ -28,7 +28,7 @@ class Site extends Component {
     }
 
     updateBackground = (pathname) => {
-        if (pathname.startsWith("/posts/" && pathname !== "/posts/all")) {
+        if (pathname.startsWith("/posts/") && pathname !== "/posts/all") {
             document.body.style.backgroundImage = "";
         }
         else {
