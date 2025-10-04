@@ -67,7 +67,7 @@ class BlogApp extends React.Component {
 
     const targetPath = `../assets/posts/${this.state.name}.md`;
     if (!modules[targetPath]) {
-      console.error("文件不存在:", targetPath);;
+      console.error("文件不存在:", targetPath);
       return;
     }
     

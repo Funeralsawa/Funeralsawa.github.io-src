@@ -20,7 +20,7 @@ class PaperBanner extends Component {
 
     getPaperInfo = () => {
         // posts 是数组，格式类似 [{ file: "React.md", url: "/posts/React.md" }, ...]
-        const post = posts.find(p => p.url === `${this.props.location.pathname}.md`);
+        const post = posts.find(p => p.url === `${decodeURIComponent(this.props.location.pathname)}.md`);
         const name = post ? post.file.replace(/\.md$/, '') : "";
         if (!post) throw new Error('未找到对应的文章');
         this.setState({name: name, publishedAt: post.time});
