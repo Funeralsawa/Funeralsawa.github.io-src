@@ -323,6 +323,8 @@ body {
 .blog-data-el {
     cursor: pointer;
     transition: color 0.3s;
+    color: unset;
+    text-decoration: none;
 }
 
 .blog-data-el:hover {
@@ -367,7 +369,7 @@ body {
 .content-aside-newest-essay {
     position: sticky;
     top: 1rem; /* 距离屏幕顶部的固定位置 */
-    max-height: calc(100vh - 1rem); /*限制高度为屏幕高度 - top 的间距 */
+    max-height: 40vh; /*限制高度为屏幕高度 - top 的间距 */
 }
 
 .bi-clock-history {
@@ -377,10 +379,10 @@ body {
 .content-aside-newest-essay > div {
     overflow: auto;
     width: 100%;
+    max-height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .content-aside-newest-essay > div::-webkit-scrollbar-track {
@@ -398,7 +400,7 @@ body {
 
 .content-aside-newest-essay > div > ul {
     list-style: none;
-    position: relative; 
+    position: relative;
     padding: 0;
     margin: 0;
 }
@@ -432,7 +434,14 @@ body {
     z-index: 1;
 }
 
-.content-aside-newest-essay > div > ul li > .title {
+.content-aside-newest-essay > div > ul li > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-aside-newest-essay > div > ul li .title {
     font-size: 1vw;
     text-align: left;
     text-decoration: none;
@@ -440,11 +449,11 @@ body {
     transition: color 0.3s;
 }
 
-.content-aside-newest-essay > div > ul li > .title:hover {
+.content-aside-newest-essay > div > ul li .title:hover {
     color: aqua;
 }
 
-.content-aside-newest-essay > div > ul li > .time {
+.content-aside-newest-essay > div > ul li .time {
     font-size: small;
     text-align: left;
     color: #908585;
@@ -459,7 +468,7 @@ body {
 
 .preview-card {
     border: 1px solid #e1e4e8;
-    padding: 0 16px;
+    padding: 0 16px 16px 16px !important;
     box-shadow: 0 1px 3px rgba(27, 31, 35, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
@@ -493,6 +502,10 @@ body {
     color: #949698;
     font-size: small;
     margin-top: 2%;
+}
+
+.footer p {
+    user-select: none !important;
 }
 
 .markdown-body {
@@ -672,6 +685,17 @@ body {
     font-size: 3vw;
     user-select: none;
     transform: translate(-50%, -50%);
+}
+
+.allPosts-Container {
+    width: 70%;
+    margin: 4% auto;
+    position: relative;
+    animation: fadeIn 2s ease-in;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh 0;
 }
 
 .subscribeDiv {

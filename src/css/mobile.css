@@ -92,7 +92,7 @@
     }
 
     /* 列表字体变大 */
-    .content-aside-newest-essay > div > ul li > .title {
+    .content-aside-newest-essay > div > ul li .title {
         font-size: clamp(14px, 4vw, 18px);
         color: wheat;
     }
@@ -115,6 +115,21 @@
     .card-widget {
         width: 100%;
         padding: 5% 3%;
+    }
+
+    .allPosts-Container {
+        width: 95%;
+        margin-top: 10vh;
+    }
+
+    .preview-card {
+        max-height: 15vh;
+    }
+
+    .preview-content {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
     }
 
     .blog-content {
@@ -153,7 +168,7 @@
         width: 35%;
     }
 
-    .content-aside-newest-essay > div > ul li > .title {
+    .content-aside-newest-essay > div > ul li .title {
         font-size: clamp(13px, 4.5vw, 16px);
     }
 }

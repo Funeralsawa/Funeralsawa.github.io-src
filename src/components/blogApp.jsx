@@ -8,7 +8,6 @@ import { setToc } from "../redux/action.js";
 import { setID } from "../redux/action.js";
 import { connect } from "react-redux";
 import { useParams } from 'react-router-dom';
-import posts from '../assets/posts/posts.json';
 
 // 自定义 slugify
 function slugify(text) {

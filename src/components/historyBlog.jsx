@@ -23,8 +23,10 @@ class HistoryBlog extends Component {
                         </li>
                         {this.state.data.map((data, index) => (
                             <li key={index}>
-                                <Link to={data.url.split(".")[0]} className='title'>{data.file}</Link>
-                                <div className='time'>{data.time}</div>
+                                <div>
+                                    <Link to={data.url.split(".")[0]} className='title'>{data.file}</Link>
+                                    <div className='time'>{data.time.split(" ")[0]}</div>
+                                </div>
                             </li>
                         ))}
                     </ul>

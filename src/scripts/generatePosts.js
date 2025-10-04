@@ -19,13 +19,18 @@ const files = fs.readdirSync(postsDir)
     const year = mtime.getFullYear();
     const month = String(mtime.getMonth() + 1).padStart(2, '0');
     const day = String(mtime.getDate()).padStart(2, '0');
+    const hour = String(mtime.getHours()).padStart(2, '0');
+    const minute = String(mtime.getMinutes()).padStart(2, '0');
+    const second = String(mtime.getSeconds()).padStart(2, '0');
 
     return {
       file: f,
       url: `/posts/${f}`,
-      time: `${year}-${month}-${day}`
+      time: `${year}-${month}-${day} ${hour}:${minute}:${second}` // 包含时间
     };
   });
+
+files.sort((a, b) => new Date(b.time) - new Date(a.time)); // 按时间降序排序
 
 fs.writeFileSync(path.join(postsDir, 'posts.json'), JSON.stringify(files, null, 2));
 console.log('posts.json 已生成');

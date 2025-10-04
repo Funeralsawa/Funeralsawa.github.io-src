@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './navbar';
 import Head from './head';
 import Content from './content';
+import AllPosts from './allPosts';
 import Footer from './footer';
 import BlogApp from './blogApp';
 import AsideNavbar from './asideNavbar';
@@ -27,7 +28,7 @@ class Site extends Component {
     }
 
     updateBackground = (pathname) => {
-        if (pathname.startsWith("/posts/")) {
+        if (pathname.startsWith("/posts/" && pathname !== "/posts/all")) {
             document.body.style.backgroundImage = "";
         }
         else {
@@ -46,6 +47,7 @@ class Site extends Component {
                         <Content />
                         </React.Fragment>
                     )} />
+                    <Route path="/posts/all" element={<AllPosts />} />
                     <Route path="/posts/:name" element={(
                         <>
                             <div className="blog-content-container">
