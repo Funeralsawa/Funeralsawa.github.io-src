@@ -14,8 +14,10 @@ const files = fs.readdirSync(postsDir)
     const filePath = path.join(postsDir, f);
     const stats = fs.statSync(filePath); // 获取文件信息
     const mtime = stats.mtime; // 最后修改时间
+    const birthtime = stats.birthtime; // 创建时间
+    const fontNum = fs.readFileSync(filePath, 'utf-8').length; // 读取文件内容并计算字数
 
-    // 格式化为 YYYY-MM-DD
+    // 修改事件，格式化为 YYYY-MM-DD
     const year = mtime.getFullYear();
     const month = String(mtime.getMonth() + 1).padStart(2, '0');
     const day = String(mtime.getDate()).padStart(2, '0');
@@ -23,10 +25,21 @@ const files = fs.readdirSync(postsDir)
     const minute = String(mtime.getMinutes()).padStart(2, '0');
     const second = String(mtime.getSeconds()).padStart(2, '0');
 
+    // 创建时间，格式化为 YYYY-MM-DD
+    const cYear = birthtime.getFullYear();
+    const cMonth = String(birthtime.getMonth() + 1).padStart(2, '0');
+    const cDay = String(birthtime.getDate()).padStart(2, '0');
+    const cHour = String(birthtime.getHours()).padStart(2, '0');
+    const cMinute = String(birthtime.getMinutes()).padStart(2, '0');
+    const cSecond = String(birthtime.getSeconds()).padStart(2, '0');
+    const created = `${cYear}-${cMonth}-${cDay} ${cHour}:${cMinute}:${cSecond}`;
+
     return {
       file: f,
       url: `/posts/${f}`,
-      time: `${year}-${month}-${day} ${hour}:${minute}:${second}` // 包含时间
+      time: `${created}`,
+      LastChangeTime: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
+      fontNum: fontNum
     };
   });
 

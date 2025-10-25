@@ -19,7 +19,6 @@ class HistoryBlog extends Component {
                     <ul>
                         <li>
                             <div className='title' style={{ color: "unset" }}>敬请期待</div>
-                            <div className='time'>2025-08-09</div>
                         </li>
                         {this.state.data.map((data, index) => (
                             <li key={index}>

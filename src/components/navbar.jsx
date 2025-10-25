@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import headImg from "../assets/head.jpg";
 import InfoDrawer from './infoDrawer';
-import Subscribe from './subscribe';
 
 class Navbar extends Component {
     state = {
@@ -89,11 +88,6 @@ class Navbar extends Component {
                                 &nbsp;
                                 首页
                             </a>
-                            <div className="subscribe-button" onClick={this.handleSubscribeClick}>
-                                <i class="bi bi-airplane"></i>
-                                &nbsp;
-                                订阅
-                            </div>
                         </div>
                         <div className="drawer-toggle" onClick={() => this.setOpen(true)}>☰</div>
                     </div>
@@ -104,9 +98,6 @@ class Navbar extends Component {
                     </div>
                     <div className={`info-drawer-overray ${this.state.open ? 'open' : ''}`}
                             onClick={() => this.setOpen(false)}>
-                    </div>
-                    <div className="subscribe-content" style={{transform: "translateX(120%)"}}>
-                        <Subscribe />
                     </div>
                 </nav>
             </React.Fragment>

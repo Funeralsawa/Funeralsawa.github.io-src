@@ -6,6 +6,9 @@ class PaperBanner extends Component {
     state = {
         name: "",
         publishedAt: "",
+        lastChangeTime: "",
+        fontNum: 0,
+        isMobile: window.innerWidth < 768
     }
     
     componentDidMount() {
@@ -23,7 +26,12 @@ class PaperBanner extends Component {
         const post = posts.find(p => p.url === `${decodeURIComponent(this.props.location.pathname)}.md`);
         const name = post ? post.file.replace(/\.md$/, '') : "";
         if (!post) throw new Error('未找到对应的文章');
-        this.setState({name: name, publishedAt: post.time});
+        this.setState({
+            name: name, 
+            publishedAt: post.time, 
+            lastChangeTime: post.LastChangeTime, 
+            fontNum: post.fontNum
+        });
     }
     
     render() {
@@ -31,8 +39,27 @@ class PaperBanner extends Component {
             <React.Fragment>
                 <div className="paper-banner">
                     <div className="paper-banner-content">
-                        <h1>{this.state.name}</h1>
-                        <p className='paper-banner-content-time'>发表时间：{this.state.publishedAt}</p>
+                        <h1 align='center'>{this.state.name}</h1>
+                        <div className="paperInfo">
+                            <p className='paper-banner-content-font'>
+                                <i class="bi bi-calendar" />
+                                &nbsp;
+                                发表时间：{this.state.publishedAt}
+                            </p>
+                            {this.state.isMobile ? null : (<p className='paper-banner-content-font'>
+                                &emsp;|&emsp;</p>)}
+                            <p className='paper-banner-content-font'>
+                                <i class="bi bi-clock" />
+                                &nbsp;
+                                最后更新时间：{this.state.lastChangeTime}
+                            </p>
+                            {this.state.isMobile ? null : (<br />)}
+                            <p className='paper-banner-content-font font-num'>
+                                <i class="bi bi-file-earmark-font" />
+                                &nbsp;
+                                总字数：{this.state.fontNum} 
+                            </p>
+                        </div>
                     </div>
                 </div>
             </React.Fragment>

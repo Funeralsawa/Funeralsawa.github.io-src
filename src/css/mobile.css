@@ -26,6 +26,13 @@
         transition: right 0.3s linear;
     }
 
+    .aside-navbar-arrow {
+        right: -8vw;
+        z-index: 1000;
+        padding: 0 1.5%;
+        transition: right 0.3s linear;
+    }
+
     .aside-navbar-drawer {
         right: 12%;
     }
@@ -120,6 +127,15 @@
     .allPosts-Container {
         width: 95%;
         margin-top: 10vh;
+    }
+
+    .paper-banner-content-font {
+        display: block;
+    }
+
+    .font-num {
+        display: inline;
+        text-align: unset;
     }
 
     .preview-card {
