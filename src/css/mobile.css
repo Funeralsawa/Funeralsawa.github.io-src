@@ -26,21 +26,10 @@
         transition: right 0.3s linear;
     }
 
-    .aside-navbar-arrow {
-        right: -8vw;
-        z-index: 1000;
-        padding: 0 1.5%;
-        transition: right 0.3s linear;
-    }
-
     .aside-navbar-drawer {
-        right: 12%;
-    }
-
-    .aside-navbar-drawer-open {
-        width: 80%;
+        width: 65%;
         height: 40%;
-        background: #FFFFFF;
+        right: 12%;
     }
 
     .aside-navbar-display {
@@ -136,6 +125,10 @@
     .font-num {
         display: inline;
         text-align: unset;
+    }
+
+    .preview-container {
+        width: 90%;
     }
 
     .preview-card {

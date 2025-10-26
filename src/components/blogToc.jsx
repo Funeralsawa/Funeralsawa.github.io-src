@@ -22,7 +22,7 @@ class BlogToc extends Component {
     };
 
     render() { 
-        const {activeId, toc} = this.props;
+        const {activeId, toc, theme} = this.props;
         return (
             <React.Fragment>
                 <div style={{
@@ -44,7 +44,7 @@ class BlogToc extends Component {
                             href={`#${id}`}
                             onClick={(e) => this.handleTOCClick(e, id)}
                             style={{
-                            color: activeId === id ? "#0366d6" : "#333",
+                            color: activeId === id ? (theme === "dark" ? '#58a6ff' : '#0969da') : ("unset"),
                             textDecoration: "none",
                             cursor: "pointer",
                             }}
