@@ -50,6 +50,7 @@ class Site extends Component {
                     <Route path="/posts/all" element={<AllPosts />} />
                     <Route path="/posts/:name" element={(
                         <>
+                            <div className='blog-content-overray'></div>
                             <div className="blog-content-container">
                                 <PaperBanner />
                                 <div className='blog-content'>

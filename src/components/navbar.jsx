@@ -43,10 +43,7 @@ class Navbar extends Component {
     }
 
     onClick = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
+        window.location.href = "/";
     }
 
     handleSubscribeClick = () => {

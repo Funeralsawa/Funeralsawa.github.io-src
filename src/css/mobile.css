@@ -141,6 +141,11 @@
         margin: 0;
     }
 
+    .blog-content-overray {
+        background-image: url("../assets/reymu.png");
+        background-position: bottom;
+    }
+
     .blog-content {
         width: 95%;
         flex-direction: column;
