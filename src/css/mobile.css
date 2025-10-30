@@ -113,9 +113,12 @@
         padding: 5% 3%;
     }
 
+    .allPosts {
+        margin-top: 20%;
+    }
+
     .allPosts-Container {
         width: 95%;
-        margin-top: 10vh;
     }
 
     .paper-banner-content-font {

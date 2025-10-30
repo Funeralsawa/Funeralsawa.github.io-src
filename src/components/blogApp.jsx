@@ -7,7 +7,7 @@ import "github-markdown-css/github-markdown.css";
 import { setToc } from "../redux/action.js";
 import { setID } from "../redux/action.js";
 import { connect } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // 自定义 slugify
 function slugify(text) {
@@ -27,6 +27,10 @@ function slugify(text) {
     .replace(/\-\-+/g, "-")
     .replace(/^-+/, "")
     .replace(/-+$/, "");
+}
+
+function removeFrontMatter(text) {
+  return text.replace(/^---[\s\S]*?---/, "").trim();
 }
 
 class BlogApp extends React.Component {
@@ -67,16 +71,19 @@ class BlogApp extends React.Component {
 
     const targetPath = `../assets/posts/${this.state.name}.md`;
     if (!modules[targetPath]) {
-      console.error("文件不存在:", targetPath);
+      setTimeout(() => {
+        this.props.navigate("/404");
+      });
       return;
     }
     
     modules[targetPath]()
     .then((text) => {
+      const clean = removeFrontMatter(text);
       const toc = this.generateTOC(text);
-      const htmlContent = marked.parse(text);
+      const htmlContent = marked.parse(clean);
 
-      this.setState({ markdownText: text, htmlContent, toc });
+      this.setState({ markdownText: clean, htmlContent, toc });
       this.props.setToc(toc);
 
       window.addEventListener("scroll", this.handleScroll);
@@ -159,7 +166,8 @@ const mapDispatchToProps = {
 
 const BlogAppWithParams = (props) => {
   const { name } = useParams(); // 直接解构
-  return <BlogApp {...props} name={name} />;
+  const navigate = useNavigate();
+  return <BlogApp {...props} name={name} navigate={navigate}/>;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogAppWithParams);

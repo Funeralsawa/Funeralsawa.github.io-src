@@ -6,7 +6,7 @@ class ContentPosts extends Component {
     render() { 
         return (
             <div className="content-posts">
-                <BlogPreview />
+                <BlogPreview tag="all" />
             </div>
         );
     }

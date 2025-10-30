@@ -81,7 +81,7 @@ class Navbar extends Component {
                         </div>
                         <div className="nav-links">
                             <a href="/">
-                                <i class="bi bi-house-door-fill"></i>
+                                <i className="bi bi-house-door-fill"></i>
                                 &nbsp;
                                 首页
                             </a>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import posts from '../assets/posts/posts.json';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 class PaperBanner extends Component {
     state = {
@@ -25,7 +25,12 @@ class PaperBanner extends Component {
         // posts 是数组，格式类似 [{ file: "React.md", url: "/posts/React.md" }, ...]
         const post = posts.find(p => p.url === `${decodeURIComponent(this.props.location.pathname)}.md`);
         const name = post ? post.file.replace(/\.md$/, '') : "";
-        if (!post) throw new Error('未找到对应的文章');
+        if (!post) {
+            setTimeout(() => { //给一个Effect时间让路由切换完成
+                this.props.navigate("/404", { replace: true });
+            });
+            return;
+        }
         this.setState({
             name: name, 
             publishedAt: post.time, 
@@ -67,9 +72,18 @@ class PaperBanner extends Component {
     }
 }
 
-export default (props) => {
+function PaperBannerWrapper(props) {
+    const params = useParams();
     const location = useLocation();
+    const navigate = useNavigate();
     return (
-        <PaperBanner {...props} params={useParams() } location={location} />
-    )
-};
+        <PaperBanner
+            {...props}
+            params={params}
+            location={location}
+            navigate={navigate}
+        />
+    );
+}
+
+export default PaperBannerWrapper;

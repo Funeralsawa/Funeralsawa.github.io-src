@@ -58,7 +58,7 @@ class Head extends Component {
                         </div>
                     </div>
                     <p className='float-arrow' onClick={this.handleClick}>
-                        <i class="bi bi-caret-down"></i>
+                        <i className="bi bi-caret-down"></i>
                     </p>
                 </div>
             </React.Fragment>

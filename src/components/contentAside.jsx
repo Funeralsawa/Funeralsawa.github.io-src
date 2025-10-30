@@ -16,7 +16,7 @@ class ContentAside extends Component {
                         <p>Funerals</p>
                         <BlogData />
                         <a href="https://github.com/Funeralsawa" target="_blank">
-                            <i class="bi bi-github github"></i>
+                            <i className="bi bi-github github"></i>
                             &nbsp;
                             Follow Me
                         </a>
@@ -28,7 +28,7 @@ class ContentAside extends Component {
                                 <i className="bi bi-discord dc"></i>
                             </a>
                             <a href="https://github.com/Funeralsawa" target="_blank" title='github'>
-                                <i class="bi bi-github github"></i>
+                                <i className="bi bi-github github"></i>
                             </a>
                         </div>
                     </div>

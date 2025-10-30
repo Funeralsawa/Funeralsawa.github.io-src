@@ -18,7 +18,7 @@ class InfoDrawer extends Component {
                     </div>
                     <div className="info-drawer-content-somefunction info-drawer-content-card-widget">
                         <a href="/">
-                            <i class="bi bi-house-door-fill"></i>
+                            <i className="bi bi-house-door-fill"></i>
                             &nbsp;
                             首页
                         </a>
