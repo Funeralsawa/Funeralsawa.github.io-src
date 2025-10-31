@@ -46,11 +46,14 @@ function Categories() {
                 <span onClick={() => onClickCategory()}>{category}</span>
             </div>
             <div className="card-widget categoriesList" ref={categoriesList}>
-                {Object.entries(categories).map(([key, value], index) => (
-                    <Link to={`/posts/all?tags=${value}`} key={index} className="categoriesList-item">
-                        <span>{key}</span>
-                    </Link>
-                ))}
+                {Object.entries(categories).map(([key, value], index) => {
+                    if (key === category) return null;
+                    return (
+                        <Link to={`/posts/all?tags=${value}`} key={index} className="categoriesList-item">
+                            <span>{key}</span>
+                        </Link>
+                    );
+                })}
             </div>
             <div className="categories-overray" ref={overray} onClick={() => onClickOverray()}></div>
         </React.Fragment>

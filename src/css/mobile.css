@@ -160,6 +160,16 @@
         height: auto;
         padding: 10px 0;
     }
+
+    .categoriesList {
+        width: 30% !important;
+        margin: 0 auto;
+        transform: translate(35%, 5%) !important;
+    }
+
+    .categoriesList-item {
+        font-size: 4vw;
+    }
 }
 
 @media (max-width: 480px) {

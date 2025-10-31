@@ -496,7 +496,7 @@ body {
 
 .preview-content {
     font-size: 14px;
-    color: var(--bg) !important;
+    color: #ffffff !important;
     line-height: 1.5;
     user-select: none;
 }
@@ -823,8 +823,8 @@ body {
     top: 13%;
     right: 45%;
     border-radius: 10px;
-    height: auto; /* 不要固定死高度 */
     user-select: none;
+    padding: 1% 0 !important;
 
     /* 初始收起状态 */
     max-height: 0;

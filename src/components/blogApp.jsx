@@ -80,7 +80,7 @@ class BlogApp extends React.Component {
     modules[targetPath]()
     .then((text) => {
       const clean = removeFrontMatter(text);
-      const toc = this.generateTOC(text);
+      const toc = this.generateTOC(clean);
       const htmlContent = marked.parse(clean);
 
       this.setState({ markdownText: clean, htmlContent, toc });
