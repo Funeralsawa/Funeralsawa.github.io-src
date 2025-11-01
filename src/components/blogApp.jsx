@@ -1,173 +1,122 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import pinyin from "pinyin";
 import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown.css";
-import { setToc } from "../redux/action.js";
-import { setID } from "../redux/action.js";
+import { setToc, setID } from "../redux/action.js";
 import { connect } from "react-redux";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
+import posts from '../assets/posts/posts.json';
 
-// 自定义 slugify
+// 中文 → 拼音 slug
 function slugify(text) {
-  if (!text) return "";
-  // 如果包含中文，就先转拼音
-  if (/[\u4e00-\u9fa5]/.test(text)) {
-    text = pinyin(text, { style: pinyin.STYLE_NORMAL })
-      .flat()
-      .join("-"); // 你好世界 → ni-hao-shi-jie
-  }
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/[\s]+/g, "-")
-    .replace(/[^\w\-]+/g, "")
-    .replace(/\-\-+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "");
+	if (!text) return "";
+	if (/[\u4e00-\u9fa5]/.test(text)) {
+		text = pinyin(text, { style: pinyin.STYLE_NORMAL }).flat().join("-");
+	}
+	return text
+		.toLowerCase()
+		.trim()
+		.replace(/[\s]+/g, "-")
+		.replace(/[^\w\-]+/g, "")
+		.replace(/\-\-+/g, "-")
+		.replace(/^-+/, "")
+		.replace(/-+$/, "");
 }
 
+// 去掉 front-matter 部分
 function removeFrontMatter(text) {
-  return text.replace(/^---[\s\S]*?---/, "").trim();
+	return text.replace(/^---[\s\S]*?---/, "").trim();
 }
 
-class BlogApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      markdownText: "",
-      htmlContent: "",
-      toc: [],
-      activeId: "",
-    };
-    this.contentRef = React.createRef();
-    this.containerRef = React.createRef();
-    this.idMap = {};
-
-    // marked v16 用法
-    const renderer = new marked.Renderer();
-    renderer.heading = (token) => {
-      const text = token.text || "";
-      let id = slugify(text);
-      return `<h${token.depth} id="${id}">${text}</h${token.depth}>`;
-    };
-
-    marked.setOptions({
-      renderer,
-      highlight: (code, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          return hljs.highlight(code, { language: lang }).value;
-        }
-        return hljs.highlightAuto(code).value;
-      },
-    });
-  }
-
-  componentDidMount() {
-    const modules = import.meta.glob("../assets/posts/*.md", { as: "raw" });
-
-    const targetPath = `../assets/posts/${this.state.name}.md`;
-    if (!modules[targetPath]) {
-      setTimeout(() => {
-        this.props.navigate("/404");
-      });
-      return;
-    }
-    
-    modules[targetPath]()
-    .then((text) => {
-      const clean = removeFrontMatter(text);
-      const toc = this.generateTOC(clean);
-      const htmlContent = marked.parse(clean);
-
-      this.setState({ markdownText: clean, htmlContent, toc });
-      this.props.setToc(toc);
-
-      window.addEventListener("scroll", this.handleScroll);
-    })
-    .catch(console.error);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.name !== this.props.name) {
-      this.setState({
-        name: this.props.name
-      }, this.componentDidMount);
-    }
-  }
-
-  // 生成目录
-  generateTOC(mdText) {
-    const tokens = marked.lexer(mdText);
-    return tokens
-      .filter((t) => t.type === "heading" && t.depth <= 3)
-      .map((t) => {
-        const id = slugify(t.text);
-        return { text: t.text, id, depth: t.depth };
-      });
-  }
-
-  handleScroll = () => {
-    if (!this.contentRef.current) return;
-
-    const { toc } = this.state;
-    const topOffset = -10;
-    let currentId = "";
-
-    for (const heading of toc) {
-      const el = document.getElementById(heading.id);
-      if (!el) continue;
-
-      const rect = el.getBoundingClientRect();
-      if (rect.top >= topOffset) {
-        currentId = heading.id;
-        break; // 最靠上的标题
-      }
-    }
-
-    if (currentId !== this.state.activeId) {
-      this.setState({ activeId: currentId });
-      this.props.setID(currentId);
-    }
-  };
-
-
-  render() {
-    const { htmlContent } = this.state;
-    return (
-      <React.Fragment>
-        {/* Markdown 内容 */}
-        <article
-          ref={this.contentRef}
-          className="markdown-body"
-          style={{ flex: 1, overflowWrap: "break-word" }}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
-        />
-      </React.Fragment>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  targetNode: state.targetNode,
-});
-
-const mapDispatchToProps = {
-  setToc,
-  setID
-}
-
-const BlogAppWithParams = (props) => {
-  const { name } = useParams(); // 直接解构
-  const navigate = useNavigate();
-  return <BlogApp {...props} name={name} navigate={navigate}/>;
+// marked 配置（只初始化一次）
+const renderer = new marked.Renderer();
+renderer.heading = (token) => {
+	const id = slugify(token.text);
+	return `<h${token.depth} id="${id}">${token.text}</h${token.depth}>`;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogAppWithParams);
+marked.setOptions({
+	renderer,
+	highlight(code, lang) {
+		if (lang && hljs.getLanguage(lang)) {
+			return hljs.highlight(code, { language: lang }).value;
+		}
+		return hljs.highlightAuto(code).value;
+	}
+});
+
+function BlogApp({ name, navigate, setToc, setID, htmlContent: injectedHTML = "", toc: injectedTOC = [] }) {
+	const contentRef = useRef(null);
+
+	const [htmlContent, setHtmlContent] = useState(injectedHTML);
+	const [toc, setTOCState] = useState(injectedTOC);
+
+	// 生成 TOC
+	const generateTOC = (mdText) => {
+		const tokens = marked.lexer(mdText);
+		return tokens
+			.filter((t) => t.type === "heading" && t.depth <= 3)
+			.map((t) => ({
+				text: t.text,
+				id: slugify(t.text),
+				depth: t.depth
+			}));
+	};
+
+	// 本地开发模式：运行时加载 .md
+	useEffect(() => {
+		const modules = import.meta.glob("../assets/posts/*.md", { as: "raw" });
+		const post = posts.find(p => p.url === `/posts/${name}`);
+		const target = `../assets/posts/${post.file}`;
+
+		if (!modules[target]) {
+			navigate("/404");
+			return;
+		}
+
+		modules[target]().then((text) => {
+			const clean = removeFrontMatter(text);
+			const newTOC = generateTOC(clean);
+			const newHTML = marked.parse(clean);
+
+			setHtmlContent(newHTML);
+			setTOCState(newTOC);
+			setToc(newTOC);
+		});
+	}, [name]);
+
+	// 滚动高亮目录
+	useEffect(() => {
+		const handleScroll = () => {
+			for (const h of toc) {
+				const el = document.getElementById(h.id);
+				if (el && el.getBoundingClientRect().top >= -10) {
+					setID(h.id);
+					return;
+				}
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [toc]);
+
+	return (
+		<article
+			ref={contentRef}
+			className="markdown-body"
+			style={{ flex: 1, overflowWrap: "break-word" }}
+			dangerouslySetInnerHTML={{ __html: htmlContent }}
+		/>
+	);
+}
+
+const BlogWrapper = (props) => {
+	const { name } = useParams();
+	const navigate = useNavigate();
+	return <BlogApp {...props} name={name} navigate={navigate} />;
+};
+
+export default connect(null, { setToc, setID })(BlogWrapper);

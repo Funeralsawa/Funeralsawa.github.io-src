@@ -1,9 +1,9 @@
 ---
 # 可以选择的标签有：全部，IT，生活，学习，旅行，梦话，其他
 TAGS: [其他]
-AUTHOR:
-TITLE:
-ABSTRACT:
+AUTHOR: Funerals
+TITLE: 测试
+ABSTRACT: MD解析测试
 IMG:
 ---
 

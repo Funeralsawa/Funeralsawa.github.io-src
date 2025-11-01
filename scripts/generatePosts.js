@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import matter from "gray-matter";
+import pinyinRaw from "pinyin";
 
 // 去除 markdown 语法字符
 function stripMarkdown(md) {
@@ -17,10 +18,23 @@ function stripMarkdown(md) {
     .trim();
 }
 
+
+const pinyin = pinyinRaw.default || pinyinRaw;
+
+function slugify(text) {
+	return pinyin(text, { style: pinyin.STYLE_NORMAL })
+		.flat()
+		.join("-")
+		.toLowerCase()
+		.replace(/[^a-z0-9\-]/g, "")
+		.replace(/\-+/g, "-")
+		.replace(/^\-+|\-+$/g, "");
+}
+
 // ES Module 没有 __dirname，需要手动构造
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const postsDir = path.join(__dirname, '../assets/posts');
+const postsDir = path.join(__dirname, '../src/assets/posts');
 
 const filename = process.argv[2] || null;
 
@@ -65,6 +79,9 @@ const files = fs.readdirSync(postsDir)
 		// 统一为数组，防止单个字符串造成错误
 		const tags = Array.isArray(data.TAGS) ? data.TAGS : (data.TAGS ? [data.TAGS] : []);
 
+		const title = data.TITLE?.trim() || f.replace(/\.md$/, "");
+		const slug = slugify(title);
+
 		// 修改事件，格式化为 YYYY-MM-DD
 		const year = mtime.getFullYear();
 		const month = String(mtime.getMonth() + 1).padStart(2, '0');
@@ -84,7 +101,7 @@ const files = fs.readdirSync(postsDir)
 
 		return {
 		file: f,
-		url: `/posts/${f}`,
+		url: `/posts/${slug}`,
 		time: `${created}`,
 		LastChangeTime: `${year}-${month}-${day} ${hour}:${minute}:${second}`,
 		fontNum: fontNum,

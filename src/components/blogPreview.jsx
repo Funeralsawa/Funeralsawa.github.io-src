@@ -68,7 +68,7 @@ function BlogPreview(props) {
                     const clean = removeFrontMatter(content);
                     const html = marked.parse(clean);
                     const previewHtml = trimHtml(html, 150);
-                    return { filename: post.file, previewHtml };
+                    return { url: post.url, previewHtml, filename: post.file.replace(/\.md$/, '') };
                 });
             })
             .filter(Boolean); // 去掉 null
@@ -81,10 +81,9 @@ function BlogPreview(props) {
         <React.Fragment>
             <div className="preview-container">
                 {previews.map((post, index) => {
-                    const filename = post.filename.replace(".md", "");
                     return (
-                        <Link key={index} to={`/posts/${filename}`} className="preview-card card-widget">
-                            <h3 className="preview-title">{filename}</h3>
+                        <Link key={index} to={`${post.url}`} className="preview-card card-widget">
+                            <h3 className="preview-title">{post.filename}</h3>
                             <p className="preview-content">{post.previewHtml}</p>
                         </Link>
                     )

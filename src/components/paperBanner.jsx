@@ -22,15 +22,19 @@ class PaperBanner extends Component {
     }
 
     getPaperInfo = () => {
-        // posts 是数组，格式类似 [{ file: "React.md", url: "/posts/React.md" }, ...]
-        const post = posts.find(p => p.url === `${decodeURIComponent(this.props.location.pathname)}.md`);
-        const name = post ? post.file.replace(/\.md$/, '') : "";
+        const post = posts.find(p => {
+            return p.url === `${this.props.location.pathname}`
+        });
+        
         if (!post) {
             setTimeout(() => { //给一个Effect时间让路由切换完成
                 this.props.navigate("/404", { replace: true });
             });
             return;
         }
+
+        const name = post ? post.file.replace(/\.md$/, '') : "";
+
         this.setState({
             name: name, 
             publishedAt: post.time, 
