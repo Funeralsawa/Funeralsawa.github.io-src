@@ -40,16 +40,15 @@ const filename = process.argv[2] || null;
 
 if (filename) {
 	const filepath = path.join(postsDir, `${filename}.md`);
-	const content = `
-		---
-		# 可以选择的标签有：全部，IT，生活，学习，旅行，梦话，其他
-		TAGS: []
-		AUTHOR:
-		TITLE:
-		ABSTRACT:
-		IMG:
-		---
-		在这里开始写正文内容...
+	const content = `---
+# 可以选择的标签有：全部，IT，生活，学习，旅行，梦话，其他
+TAGS: []
+AUTHOR:
+TITLE:
+ABSTRACT:
+IMG:
+---
+在这里开始写正文内容...
 	`;
 	if (fs.existsSync(filepath)) {
     	console.log(`文件已存在：${filepath}`);
